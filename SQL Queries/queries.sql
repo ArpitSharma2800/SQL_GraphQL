@@ -1,3 +1,5 @@
+/*** CREATION QUERIES ***/
+
 CREATE TABLE `customerInfo`(
     `customerId` VARCHAR(255) PRIMARY KEY NOT NULL,
     `Name` VARCHAR(255) NOT NULL,
@@ -52,3 +54,34 @@ ALTER TABLE
     
 ALTER TABLE
     `orders` ADD FOREIGN KEY(`customerId`) REFERENCES `customerInfo`(`customerId`);
+
+/*** CREATION QUERIES ENDED***/
+
+/*** CUSTOMER INFO ***/
+
+INSERT INTO `customerinfo`(`customerId`, `Name`, `PhoneNo`, `Email`, `Address`) VALUES ("SAMPLE","SAMPLE","SAMPLE","SAMPLE","SAMPLE")
+
+SELECT * FROM `customerinfo`
+
+SELECT * FROM `customerinfo` WHERE `customerId`="ID"
+
+UPDATE `customerinfo` SET `Name`="SAMPLE",`PhoneNo`="SAMPLE",`Email`="SAMPLE",`Address`="SAMPLE" WHERE `customerId`="ID"
+
+DELETE FROM `customerinfo` WHERE `customerId`="ID"
+
+/*** CUSTOMER INFO ENDED***/
+
+/*** INVENTORY INFO ***/
+
+INSERT INTO `inventory`(`inventoryId`, `itemId`, `quantity`) VALUES ("SAMPLE","SAMPLE","SAMPLE")
+
+SELECT * FROM `inventory` 
+
+SELECT * FROM `inventory` WHERE `inventoryId`="ID"
+
+UPDATE `inventory` SET `inventoryId`="SA,PLE",`itemId`="SA,PLE",`quantity`="SA,PLE" WHERE `inventoryId`="ID"
+
+DELETE FROM `inventory` WHERE `inventoryId`="ID"
+
+/*** INVENTORY INFO ENDED***/
+
