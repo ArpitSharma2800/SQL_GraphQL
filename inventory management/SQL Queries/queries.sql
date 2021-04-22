@@ -89,17 +89,31 @@ SELECT inventory.inventoryId AS inventoryId, item.Name AS itemName, item.descrip
 
 /*** STORAGE INFO ***/
 
-INSERT INTO inventory(inventoryId, itemId, quantity) VALUES ("SAMPLE","SAMPLE","SAMPLE")
+INSERT INTO storage(storageId, itemId, shelfNo) VALUES ("SAMPLE","SAMPLE","SAMPLE")
 
-SELECT * FROM inventory 
+SELECT * FROM storage 
 
-SELECT * FROM inventory WHERE inventoryId="ID"
+SELECT * FROM storage WHERE storageId="ID"
 
-UPDATE inventory SET inventoryId="SAMPLE",itemId="SAMPLE",quantity="SAMPLE" WHERE inventoryId="ID"
+UPDATE storage SET storageId="SAMPLE", itemId="SAMPLE", shelfNo="SAMPLE" WHERE storageId="ID"
 
-DELETE FROM inventory WHERE inventoryId="ID"
+DELETE FROM storage WHERE storageId="ID"
 
-SELECT inventory.inventoryId AS inventoryId, item.Name AS itemName, item.description AS itemDescription, inventory.quantity AS itemQuantity FROM inventory INNER JOIN item ON inventory.itemId = item.itemId
+SELECT storage.storageId AS storageId, item.Name AS itemName, item.description AS itemDescription, storage.shelfNo AS shelfNo FROM storage INNER JOIN item ON storage.itemId = item.itemId
 
-/*** INVENTORY INFO ENDED***/
+/*** STORAGE INFO ENDED***/
 
+
+/*** ITEM INFO ***/
+
+INSERT INTO item(itemId, Name, description) VALUES ("SAMPLE","SAMPLE","SAMPLE");
+
+SELECT * FROM item;
+
+SELECT * FROM item WHERE itemId="SAMPLE";
+
+DELETE FROM item WHERE itemId="SAMPLE";
+
+UPDATE item SET itemId="SAMPLE",Name="SAMPLE",description="SAMPLE" WHERE itemId="SAMPLE";
+
+/*** ITEM INFO ***/
