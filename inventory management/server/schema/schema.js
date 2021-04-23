@@ -65,16 +65,10 @@ const Mutation = new GraphQLObjectType({
                 }
             },
             resolve(parent, args) {
-                // let author = new Author({
-                //     name: args.name,
-                //     age: args.age
-                // });
                 return insertItems({
                     name: args.Name,
                     description: args.description
-                }).then(value => {
-                    args.Name, args.description
-                });
+                }).then(value => value[0]);
             }
         }
     }

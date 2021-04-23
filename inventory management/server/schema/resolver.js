@@ -34,7 +34,6 @@ exports.insertItems = ({
         let sql = `INSERT INTO item(itemId, Name, description) VALUES ('${itemId}','${name}','${description}');`;
         connection.query(sql, (err, results) => {
             if (err) reject(err);
-            // resolve(results);
             let sql = `SELECT * FROM item WHERE itemId='${itemId}'`;
             connection.query(sql, (err, results) => {
                 if (err) reject(err);
