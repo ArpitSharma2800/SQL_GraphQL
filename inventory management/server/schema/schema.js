@@ -1,4 +1,5 @@
 const graphql = require('graphql');
+
 const {
     GraphQLObjectType,
     GraphQLSchema,
@@ -11,27 +12,14 @@ const {
 
 const connection = require('../helpers/db');
 const {
+    itemType
+} = require('./model');
+const {
     getItem,
-    getItems
+    getItems,
+    insertItems
 } = require('./resolver');
 
-const itemType = new GraphQLObjectType({
-    name: 'Book',
-    fields: () => ({
-        // id: {
-        //     type: GraphQLID
-        // },
-        itemId: {
-            type: GraphQLString
-        },
-        Name: {
-            type: GraphQLString
-        },
-        description: {
-            type: GraphQLString
-        },
-    })
-})
 
 /** Root Query */
 const RootQuery = new GraphQLObjectType({
@@ -66,11 +54,33 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
-        /**Mutation fields */
+        addItem: {
+            type: itemType,
+            args: {
+                Name: {
+                    type: GraphQLString
+                },
+                description: {
+                    type: GraphQLString
+                }
+            },
+            resolve(parent, args) {
+                // let author = new Author({
+                //     name: args.name,
+                //     age: args.age
+                // });
+                return insertItems({
+                    name: args.Name,
+                    description: args.description
+                }).then(value => {
+                    args.Name, args.description
+                });
+            }
+        }
     }
 })
 
 module.exports = new GraphQLSchema({
     query: RootQuery,
-    // mutation: Mutation
+    mutation: Mutation
 });
