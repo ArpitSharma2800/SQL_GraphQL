@@ -117,3 +117,21 @@ DELETE FROM item WHERE itemId="SAMPLE";
 UPDATE item SET itemId="SAMPLE",Name="SAMPLE",description="SAMPLE" WHERE itemId="SAMPLE";
 
 /*** ITEM INFO ***/
+
+/*** ORDERS INFO ***/
+
+INSERT INTO orders(orderId, customerId, placedDate, deliveryDate, orderNo) VALUES ("SAMPLE","SAMPLE","SAMPLE","SAMPLE","SAMPLE")
+
+SELECT * FROM orders WHERE orderId="SAMPLE"
+
+UPDATE orders SET orderId="SAMPLE",customerId="SAMPLE",placedDate="SAMPLE",deliveryDate="SAMPLE",orderNo="SAMPLE" WHERE orderId="SAMPLE"
+
+DELETE FROM orders WHERE orderId="SAMPLE"
+
+SELECT orders.orderId AS orderId, orders.customerId AS customerId, orders.placedDate AS placedDate, orders.deliveryDate AS deliveryDate, customerInfo.Name AS customerName
+customerInfo.PhoneNo AS PhoneNo, customerInfo.Email AS email, customerInfo.Address AS address FROM orders INNER JOIN customerInfo ON customerInfo.customerId = order.customerId
+
+SELECT orders.customerId AS customerId, orderNo.quantity as quantity, item.Name AS itemName, item.description AS description FROM orders INNER JOIN OrderNo ON orders.orderNo = orderNo.orderNO INNER JOIN item ON orderNO.itemId = item.itemId
+
+/***ORDERS INFO END***/
+
