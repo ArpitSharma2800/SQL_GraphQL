@@ -11,14 +11,18 @@ const {
 
 const connection = require('../helpers/db');
 const {
-    getItem
+    getItem,
+    getItems
 } = require('./resolver');
 
 const itemType = new GraphQLObjectType({
     name: 'Book',
     fields: () => ({
-        id: {
-            type: GraphQLID
+        // id: {
+        //     type: GraphQLID
+        // },
+        itemId: {
+            type: GraphQLString
         },
         Name: {
             type: GraphQLString
@@ -33,19 +37,27 @@ const itemType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
     name: 'RootType',
     fields: {
+        /**single item */
         item: {
             type: itemType,
             args: {
-                id: {
+                itemId: {
                     type: GraphQLID
                 }
             },
             resolve(parent, args) {
                 return getItem({
-                    id: args.id
+                    id: args.itemId
                 }).then(value => value[0]);
             }
         },
+        /* multiple item  */
+        items: {
+            type: new GraphQLList(itemType),
+            resolve(parent, args) {
+                return getItems().then(value => value);
+            }
+        }
     }
 });
 
