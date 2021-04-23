@@ -8,7 +8,11 @@ const {
     GraphQLList,
     GraphQLNonNull
 } = require('graphql');
+
 const connection = require('../helpers/db');
+const {
+    getItem
+} = require('./resolver');
 
 const itemType = new GraphQLObjectType({
     name: 'Book',
@@ -16,15 +20,14 @@ const itemType = new GraphQLObjectType({
         id: {
             type: GraphQLID
         },
-        name: {
+        Name: {
             type: GraphQLString
         },
-        discription: {
+        description: {
             type: GraphQLString
         },
     })
 })
-
 
 /** Root Query */
 const RootQuery = new GraphQLObjectType({
@@ -38,7 +41,9 @@ const RootQuery = new GraphQLObjectType({
                 }
             },
             resolve(parent, args) {
-                // return connection
+                return getItem({
+                    id: args.id
+                }).then(value => value[0]);
             }
         },
     }
@@ -55,5 +60,5 @@ const Mutation = new GraphQLObjectType({
 
 module.exports = new GraphQLSchema({
     query: RootQuery,
-    mutation: Mutation
+    // mutation: Mutation
 });
