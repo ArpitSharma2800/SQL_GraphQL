@@ -59,3 +59,37 @@ exports.insertItems = ({
         });
     });
 };
+
+/** Item ended */
+
+/** Inventory */
+
+exports.insertInventory = ({
+    id,
+    quantity
+}) => {
+    return new Promise(async (resolve, reject) => {
+        let inventoryId = await uuidv4();
+        let sql = `INSERT INTO inventory(inventoryId, itemId, quantity) VALUES ('${inventoryId}','${id}','${quantity}');`;
+        connection.query(sql, (err, results) => {
+            if (err) reject(err);
+            let sql = `SELECT * FROM inventory WHERE inventoryId='${inventoryId}'`;
+            connection.query(sql, (err, results) => {
+                if (err) reject(err);
+                resolve(results);
+            });
+        });
+    });
+};
+
+exports.getInventory = ({
+    id
+}) => {
+    return new Promise((resolve, reject) => {
+        let sql = `SELECT * FROM inventory WHERE inventoryId='${id}'`;
+        connection.query(sql, (err, results) => {
+            if (err) reject(err);
+            resolve(results);
+        });
+    });
+};

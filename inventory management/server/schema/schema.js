@@ -11,13 +11,16 @@ const {
 } = require('graphql');
 const {
     itemType,
-    deleteType
+    deleteType,
+    inventoryType
 } = require('./model');
 const {
     getItem,
     getItems,
     insertItems,
-    deleteItem
+    deleteItem,
+    insertInventory,
+    getInventory
 } = require('./resolver');
 
 
@@ -45,7 +48,21 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args) {
                 return getItems().then(value => value);
             }
-        }
+        },
+        /**single inventory */
+        inventory: {
+            type: inventoryType,
+            args: {
+                inventoryId: {
+                    type: GraphQLID
+                }
+            },
+            resolve(parent, args) {
+                return getInventory({
+                    id: args.inventoryId
+                }).then(value => value[0]);
+            }
+        },
     }
 });
 
@@ -86,6 +103,23 @@ const Mutation = new GraphQLObjectType({
                 // return {
                 //     message: "done",
                 // }
+            }
+        },
+        addInventory: {
+            type: inventoryType,
+            args: {
+                itemId: {
+                    type: GraphQLID
+                },
+                quantity: {
+                    type: GraphQLInt
+                }
+            },
+            resolve(parent, args) {
+                return insertInventory({
+                    id: args.itemId,
+                    quantity: args.quantity
+                }).then(value => value[0]);
             }
         }
     }
