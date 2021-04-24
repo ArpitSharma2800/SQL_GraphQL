@@ -3,6 +3,8 @@ const {
     v4: uuidv4
 } = require('uuid');
 
+/**ITEM */
+
 exports.getItem = ({
     id
 }) => {
@@ -21,6 +23,21 @@ exports.getItems = () => {
         connection.query(sql, (err, results) => {
             if (err) reject(err);
             resolve(results);
+
+        });
+    });
+};
+
+exports.deleteItem = ({
+    id
+}) => {
+    return new Promise((resolve, reject) => {
+        let sql = `DELETE FROM item WHERE itemId='${id}'`;
+        connection.query(sql, (err, results) => {
+            if (err) reject(err);
+            resolve({
+                message: "successfully deleted",
+            });
         });
     });
 };

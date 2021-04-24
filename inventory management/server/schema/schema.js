@@ -9,15 +9,15 @@ const {
     GraphQLList,
     GraphQLNonNull
 } = require('graphql');
-
-const connection = require('../helpers/db');
 const {
-    itemType
+    itemType,
+    deleteType
 } = require('./model');
 const {
     getItem,
     getItems,
-    insertItems
+    insertItems,
+    deleteItem
 } = require('./resolver');
 
 
@@ -69,6 +69,23 @@ const Mutation = new GraphQLObjectType({
                     name: args.Name,
                     description: args.description
                 }).then(value => value[0]);
+            }
+        },
+        deleteItem: {
+            type: deleteType,
+            args: {
+                itemId: {
+                    type: GraphQLID
+                }
+            },
+            resolve(parent, args) {
+                return deleteItem({
+                    id: args.itemId,
+                }).then(value => value);
+
+                // return {
+                //     message: "done",
+                // }
             }
         }
     }

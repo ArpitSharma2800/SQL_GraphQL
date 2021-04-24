@@ -25,3 +25,15 @@ exports.itemType = new GraphQLObjectType({
         },
     })
 })
+
+exports.deleteType = new GraphQLObjectType({
+    name: 'delete',
+    fields: () => ({
+        itemId: {
+            type: GraphQLID
+        },
+        message: {
+            type: GraphQLString
+        },
+    })
+})
