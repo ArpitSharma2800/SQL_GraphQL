@@ -93,3 +93,14 @@ exports.getInventory = ({
         });
     });
 };
+
+exports.getInventorys = () => {
+    return new Promise((resolve, reject) => {
+        let sql = `SELECT * FROM inventory`;
+        connection.query(sql, (err, results) => {
+            if (err) reject(err);
+            resolve(results);
+
+        });
+    });
+};

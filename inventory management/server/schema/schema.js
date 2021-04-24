@@ -1,5 +1,3 @@
-const graphql = require('graphql');
-
 const {
     GraphQLObjectType,
     GraphQLSchema,
@@ -9,18 +7,22 @@ const {
     GraphQLList,
     GraphQLNonNull
 } = require('graphql');
+
 const {
     itemType,
     deleteType,
     inventoryType
 } = require('./model');
+
+
 const {
     getItem,
     getItems,
     insertItems,
     deleteItem,
     insertInventory,
-    getInventory
+    getInventory,
+    getInventorys
 } = require('./resolver');
 
 
@@ -63,6 +65,13 @@ const RootQuery = new GraphQLObjectType({
                 }).then(value => value[0]);
             }
         },
+        /**multiple inventory */
+        inventorys: {
+            type: new GraphQLList(inventoryType),
+            resolve(parent, args) {
+                return getInventorys().then(value => value);
+            }
+        },
     }
 });
 
@@ -71,6 +80,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
+        /** adding an item to database */
         addItem: {
             type: itemType,
             args: {
@@ -88,6 +98,7 @@ const Mutation = new GraphQLObjectType({
                 }).then(value => value[0]);
             }
         },
+        /**delete item from database */
         deleteItem: {
             type: deleteType,
             args: {
@@ -99,12 +110,9 @@ const Mutation = new GraphQLObjectType({
                 return deleteItem({
                     id: args.itemId,
                 }).then(value => value);
-
-                // return {
-                //     message: "done",
-                // }
             }
         },
+        /** adding inventory to database */
         addInventory: {
             type: inventoryType,
             args: {
