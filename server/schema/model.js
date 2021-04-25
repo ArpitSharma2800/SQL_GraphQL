@@ -78,5 +78,17 @@ exports.inventoryType = new GraphQLObjectType({
     })
 })
 
+exports.deleteInventoryType = new GraphQLObjectType({
+    name: 'deleteInventory',
+    fields: () => ({
+        inventoryId: {
+            type: GraphQLID
+        },
+        message: {
+            type: GraphQLString
+        },
+    })
+})
+
 
 /**Inventory Models ended */

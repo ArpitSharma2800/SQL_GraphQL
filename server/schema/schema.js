@@ -11,7 +11,8 @@ const {
 const {
     itemType,
     deleteType,
-    inventoryType
+    inventoryType,
+    deleteInventoryType
 } = require('./model');
 
 
@@ -22,7 +23,8 @@ const {
     deleteItem,
     insertInventory,
     getInventory,
-    getInventorys
+    getInventorys,
+    deleteInventory
 } = require('./resolver');
 
 
@@ -129,7 +131,21 @@ const Mutation = new GraphQLObjectType({
                     quantity: args.quantity
                 }).then(value => value[0]);
             }
-        }
+        },
+        /**delete inventory */
+        deleteInventory: {
+            type: deleteInventoryType,
+            args: {
+                inventoryId: {
+                    type: GraphQLID
+                }
+            },
+            resolve(parent, args) {
+                return deleteInventory({
+                    id: args.inventoryId,
+                }).then(value => value);
+            }
+        },
     }
 })
 

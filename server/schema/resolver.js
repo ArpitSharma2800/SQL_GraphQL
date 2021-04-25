@@ -104,3 +104,19 @@ exports.getInventorys = () => {
         });
     });
 };
+
+exports.deleteInventory = ({
+    id
+}) => {
+    return new Promise((resolve, reject) => {
+        let sql = `DELETE FROM inventory WHERE inventoryId='${id}'`;
+        connection.query(sql, (err, results) => {
+            if (err) reject(err);
+            resolve({
+                message: "successfully deleted",
+            });
+        });
+    });
+};
+
+/** Inventory Ended*/
