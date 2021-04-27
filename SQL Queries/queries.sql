@@ -31,7 +31,8 @@ CREATE TABLE storage(
 CREATE TABLE orderNo(
     OrderNo VARCHAR(255) PRIMARY KEY,
     ItemId VARCHAR(255) NOT NULL,
-    quantity INT NOT NULL
+    quantity INT NOT NULL,
+    orderId VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE inventory(
@@ -47,10 +48,10 @@ ALTER TABLE
     inventory ADD FOREIGN KEY(itemId) REFERENCES item(itemId);
 
 ALTER TABLE
-    orderNo ADD  FOREIGN KEY(ItemId) REFERENCES item(itemId);
+    orderNo ADD FOREIGN KEY(orderId) REFERENCES orders(orderId);
 
 ALTER TABLE
-    orders ADD FOREIGN KEY(orderNo) REFERENCES orderNo(OrderNo);
+    orderNo ADD FOREIGN KEY(ItemId) REFERENCES item(itemId);
     
 ALTER TABLE
     orders ADD FOREIGN KEY(customerId) REFERENCES customerInfo(customerId);
@@ -135,3 +136,20 @@ SELECT orders.customerId AS customerId, orderNo.quantity as quantity, item.Name 
 
 /***ORDERS INFO END***/
 
+/*** ORDERNO INFO ***/
+
+SELECT * FROM orderNo
+
+SELECT * FROM orderno WHERE orderId="SAMPLE"
+
+DELETE FROM orderno WHERE orderId="SAMPLE"
+
+DELETE FROM orderno WHERE OrderNo="SAMPLE"
+
+INSERT INTO orderno(OrderNo, ItemId, quantity, orderId) VALUES ("SAMPLE","SAMPLE","SAMPLE","SAMPLE")
+
+UPDATE orderno SET OrderNo="SAMPLE",ItemId="SAMPLE",quantity="SAMPLE",orderId="SAMPLE" OrderNo="SAMPLE"
+
+SELECT orderNO.orderNo AS orderNO, orderNo.quantity, item.itemId AS itemId, item.Name AS itemName, item.description AS itemDescription FROM orderNo INNER JOIN item ON orderNo.itemId = item.itemId WHERE orderId="SAMPLE"
+
+/*** ORDERNO INFO ENDED ***/
