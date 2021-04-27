@@ -12,7 +12,7 @@ CREATE TABLE orders(
     orderId VARCHAR(255) PRIMARY KEY NOT NULL,
     customerId VARCHAR(255) NOT NULL,
     placedDate DATE NULL,
-    deliveryDate DATE NULL,
+    deliveryDate DATE NULL
 );
 
 CREATE TABLE item(
