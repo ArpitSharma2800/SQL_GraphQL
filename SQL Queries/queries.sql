@@ -128,8 +128,8 @@ UPDATE orders SET orderId="SAMPLE",customerId="SAMPLE",placedDate="SAMPLE",deliv
 
 DELETE FROM orders WHERE orderId="SAMPLE"
 
-SELECT orders.orderId AS orderId, orders.customerId AS customerId, orders.placedDate AS placedDate, orders.deliveryDate AS deliveryDate, customerInfo.Name AS customerName
-customerInfo.PhoneNo AS PhoneNo, customerInfo.Email AS email, customerInfo.Address AS address FROM orders INNER JOIN customerInfo ON customerInfo.customerId = order.customerId
+SELECT orders.orderId AS orderId, orders.customerId AS customerId, orders.placedDate AS placedDate, orders.deliveryDate AS deliveryDate, customerInfo.Name AS customerName,
+customerInfo.PhoneNo AS PhoneNo, customerInfo.Email AS email, customerInfo.Address AS address FROM orders INNER JOIN customerInfo ON customerInfo.customerId = orders.customerId
 
 /***ORDERS INFO END***/
 
